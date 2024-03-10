@@ -1,11 +1,15 @@
 package com.felipe.dslearn.entities.pk;
 
+import com.felipe.dslearn.entities.Deliver;
 import com.felipe.dslearn.entities.Offer;
 import com.felipe.dslearn.entities.User;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Embeddable
@@ -17,6 +21,9 @@ public class EnrrolmentPK {
     @ManyToOne
     @JoinColumn(name = "offer_id")
     private Offer offer;
+
+    @OneToMany(mappedBy = "enrollment")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public EnrrolmentPK(){}
 
@@ -39,6 +46,10 @@ public class EnrrolmentPK {
 
     public void setOffer(Offer offer) {
         this.offer = offer;
+    }
+
+    public List<Deliver> getDeliveries() {
+        return deliveries;
     }
 
     @Override

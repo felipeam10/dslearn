@@ -2,9 +2,7 @@ package com.felipe.dslearn.entities;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_lesson")
@@ -28,6 +26,9 @@ public abstract class Lesson {
             }
         )
     private Set<Enrollment> enrollmentsDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "lesson")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public Lesson(){}
     public Lesson(Long id, String title, Integer position, Section section) {
@@ -71,6 +72,10 @@ public abstract class Lesson {
 
     public Set<Enrollment> getEnrollmentsDone() {
         return enrollmentsDone;
+    }
+
+    public List<Deliver> getDeliveries() {
+        return deliveries;
     }
 
     @Override
